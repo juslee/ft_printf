@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/07 16:48:44 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/09 20:46:41 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
  * @brief The main file for the ft_printf project
  */
 
+#include "libft.h"
 #include "ft_printf.h"
 
 int	ft_parse_format(const char **format, va_list args)
@@ -77,3 +78,4 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
+

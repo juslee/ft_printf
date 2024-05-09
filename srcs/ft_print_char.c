@@ -6,11 +6,14 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:06:14 by welee             #+#    #+#             */
-/*   Updated: 2024/05/07 15:13:49 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/09 16:40:46 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_print_char(int c)
 {
-	return (ft_putchar(c));
+	ft_putchar((char)c);
+	return (ft_strlen((const char *)&c));
 }
