@@ -5,38 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/20 09:55:05 by welee             #+#    #+#              #
-#    Updated: 2024/05/20 19:32:25 by welee            ###   ########.fr        #
+#    Created: 2024/05/20 12:23:55 by welee             #+#    #+#              #
+#    Updated: 2024/05/20 19:16:15 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = tests
-SRCS = $(shell find . -name '*.c')
-OBJS = $(SRCS:.c=.o)
-EXECS = $(SRCS:.c=)
-INCLUDES = -I ../includes
+NAME = libftprintf.a
 
 CC = cc
-RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L../bin -lftprintf
-UNAME := $(shell uname)
-ifeq ($(UNAME), Darwin)
-# macOS specific settings
-	VALGRIND = leaks --atExit --list --
-else ifeq ($(UNAME), Linux)
-# Linux specific settings
-	VALGRIND = valgrind --
-endif
+LIBC = ar rcs
+RM = rm -f
+MKDIR = mkdir -p
 
-all: $(EXECS)
-%: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
-	$@
-#	$(VALGRIND) $@
-	$(RM) $@
+SRCS = $(shell find . -name '*.c' ! -name '*_bonus.c')
+BSRCS = $(shell find . -name '*_bonus.c')
+OBJS = $(SRCS:%.c=%.o)
+BOBJS = $(BSRCS:%.c=%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	${LIBC} ${NAME} ${OBJS}
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	${RM} $(OBJS) $(EXECS)
+	$(RM) $(OBJS) $(BOBJS)
+
 fclean: clean
+	$(RM) $(NAME)
+
 re: fclean all
-.PHONY: all clean fclean re
+
+bonus: $(NAME) $(BOBJS)
+	${LIBC} ${NAME} ${BOBJS}
+
+.PHONY: all clean fclean re bonus

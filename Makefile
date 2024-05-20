@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/05/20 09:54:58 by welee            ###   ########.fr        #
+#    Updated: 2024/05/20 19:19:34 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ TEST_DIR = tests
 DIST_DIR = dist
 BIN_DIR = bin
 DOCS_DIR = docs
+PUBLIC_DIR = public
 
 INCLUDES = -I ${INCLUDES_DIR} -I ${LIBFT_DIR}/bin
 CC = cc
@@ -28,6 +29,10 @@ LIBC = ar rcs
 RM = rm -f
 MAKE = make -C
 MKDIR = mkdir -p
+CP = cp -f
+FRANCINETTE = francinette
+FRANCINETTE_FLAGS = -s
+WHOAMI = whoami
 
 SRCS = $(shell find $(SRCS_DIR) -name '*.c')
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
@@ -57,6 +62,13 @@ fclean: clean
 
 re: fclean all dist
 
+dist:
+	@$(MKDIR) $(DIST_DIR)
+	@$(foreach src,$(SRCS),cp $(src) $(DIST_DIR);)
+	@find $(INCLUDES_DIR) -type f -exec cp {} $(DIST_DIR) \;
+	@$(CP) $(PUBLIC_DIR)/Makefile $(DIST_DIR)
+	@echo $(shell $(WHOAMI)) > $(DIST_DIR)/author
+
 norm:
 	$(NORM) $(NORM_FLAGS) $(SRCS_DIR) $(INCLUDES_DIR)
 
@@ -66,4 +78,4 @@ tests: all
 docs:
 	${DOXYGEN} ${DOXYGEN_CONFIG}
 
-.PHONY: all clean fclean re bonus norm tests docs
+.PHONY: all clean fclean re dist norm tests docs
