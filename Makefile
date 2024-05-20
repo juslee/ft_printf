@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/05/09 20:40:52 by welee            ###   ########.fr        #
+#    Updated: 2024/05/20 09:54:58 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,30 +39,23 @@ NORM_FLAGS = -R CheckForbiddenSourceHeader -R CheckDefine
 DOXYGEN = doxygen
 DOXYGEN_CONFIG = Doxyfile
 
-all: $(LIBFT_DIR) ${NAME}
+all: ${NAME}
 
 $(NAME): $(OBJS)
 	$(MKDIR) $(BIN_DIR)
-	$(LIBC) $(BIN_DIR)/$(NAME) $(LIBFT_DIR)/bin/libft.a $(OBJS)
+	$(LIBC) $(BIN_DIR)/$(NAME) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(LIBFT_DIR):
-	$(MAKE) $(DIST_DIR) all
-
 clean:
 	$(RM) $(OBJS)
-	$(RM) -r $(DIST_DIR)
-	$(MAKE) $(TEST_DIR) clean
 
 fclean: clean
 	$(RM) $(BIN_DIR)/$(NAME)
 
 re: fclean all dist
-
-bonus: all
 
 norm:
 	$(NORM) $(NORM_FLAGS) $(SRCS_DIR) $(INCLUDES_DIR)

@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:19:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/09 16:38:45 by welee            ###   ########.fr       */
+/*   Created: 2024/05/19 19:04:31 by welee             #+#    #+#             */
+/*   Updated: 2024/05/20 09:49:38 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/**
+ * @file ft_itoa.c
+ * @brief Convert an integer to a string
+ */
+
+#include <stdlib.h>
 #include "ft_printf.h"
 
-int	ft_print_pointer(unsigned long long ptr)
+/**
+ * @brief Convert an integer to a string
+ * @param n The integer to convert
+ * @return The string representation of the integer
+ */
+char	*ft_itoa(int n)
 {
-	ft_putstr("0x");
-	return (ft_strlen("0x") + ft_print_hex(ptr, 0));
+	char	*str;
+	int		len;
+
+	len = ft_numlen_base(n, 10);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	ft_convert_base(str, n, len, 10);
+	return (str);
 }

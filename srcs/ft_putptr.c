@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:36:50 by welee             #+#    #+#             */
-/*   Updated: 2024/05/09 16:44:14 by welee            ###   ########.fr       */
+/*   Created: 2024/05/19 19:11:45 by welee             #+#    #+#             */
+/*   Updated: 2024/05/19 19:14:16 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/**
+ * @file ft_putptr.c
+ * @brief The function that prints a pointer to stdout
+ */
+
 #include "ft_printf.h"
 
-int	ft_print_hex(unsigned long long n, int is_upper)
+/**
+ * @brief Print a pointer to stdout
+ * @param ptr The pointer to be printed
+ * @return int The number of characters printed
+ */
+int	ft_putptr(unsigned long ptr)
 {
-	int		ret;
+	int	len;
 
-	ret = 0;
-	if (n >= 16)
-		ret += ft_print_hex(n / 16, is_upper);
-	if (n % 16 < 10)
-		ret += ft_print_char(n % 16 + '0');
-	else
-	{
-		if (is_upper)
-			ret += ft_print_char(n % 16 - 10 + 'A');
-		else
-			ret += ft_print_char(n % 16 - 10 + 'a');
-	}
-	return (ret);
+	len = 0;
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	len += ft_putstr("0x");
+	len += ft_puthex(ptr, 0);
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/09 20:46:41 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/20 10:05:49 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,34 @@
  * @brief The main file for the ft_printf project
  */
 
-#include "libft.h"
+#include <stdarg.h>
 #include "ft_printf.h"
 
-int	ft_parse_format(const char **format, va_list args)
+/**
+ * @brief Handle the specifier and print the formatted string
+ * @param specifier The specifier to be handled
+ * @param args The arguments to be formatted
+ * @return int The number of characters printed
+ */
+static int	handle_specifier(char specifier, va_list args)
 {
-	int	count;
-
-	count = 0;
-	if (**format == 'c')
-		count += ft_print_char(va_arg(args, int));
-	else if (**format == 's')
-		count += ft_print_string(va_arg(args, char *));
-	else if (**format == 'p')
-		count += ft_print_pointer(va_arg(args, unsigned long long));
-	else if (**format == 'd' || **format == 'i')
-		count += ft_print_int(va_arg(args, int));
-	else if (**format == 'u')
-		count += ft_print_unsigned_int(va_arg(args, unsigned int));
-	else if (**format == 'x')
-		count += ft_print_hex(va_arg(args, unsigned int), 0);
-	else if (**format == 'X')
-		count += ft_print_hex(va_arg(args, unsigned int), 1);
-	else if (**format == '%')
-		count += ft_print_char('%');
-	else
-	{
-		ft_putchar('%');
-		ft_putchar(**format);
-		count += 2;
-	}
-	return (count);
+	if (specifier == SPEC_CHAR)
+		return (ft_putchar(va_arg(args, int)));
+	else if (specifier == SPEC_STRING)
+		return (ft_putstr(va_arg(args, char *)));
+	else if (specifier == SPEC_POINTER)
+		return (ft_putptr(va_arg(args, unsigned long)));
+	else if (specifier == SPEC_DECIMAL || specifier == SPEC_INTEGER)
+		return (ft_putnbr(va_arg(args, int)));
+	else if (specifier == SPEC_UNSIGNED)
+		return (ft_putunbr(va_arg(args, unsigned int)));
+	else if (specifier == SPEC_HEX_LOW)
+		return (ft_puthex(va_arg(args, unsigned int), 0));
+	else if (specifier == SPEC_HEX_UP)
+		return (ft_puthex(va_arg(args, unsigned int), 1));
+	else if (specifier == SPEC_PERCENT)
+		return (ft_putchar('%'));
+	return (0);
 }
 
 /**
@@ -57,25 +54,27 @@ int	ft_parse_format(const char **format, va_list args)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		count;
+	int		i;
+	int		len;
 
-	count = 0;
 	va_start(args, format);
-	while (*format)
+	i = 0;
+	len = 0;
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%' && format[i + 1])
 		{
-			format++;
-			count += ft_parse_format(&format, args);
+			i++;
+			len += handle_specifier(format[i], args);
 		}
 		else
 		{
-			ft_putchar(*format);
-			count++;
+			ft_putchar(format[i]);
+			len++;
 		}
-		format++;
+		i++;
 	}
 	va_end(args);
-	return (count);
+	return (len);
 }
 

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 15:06:14 by welee             #+#    #+#             */
-/*   Updated: 2024/05/09 16:40:46 by welee            ###   ########.fr       */
+/*   Created: 2024/05/19 18:58:32 by welee             #+#    #+#             */
+/*   Updated: 2024/05/20 10:04:05 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/**
+ * @file ft_putchar.c
+ * @brief The function that prints a character to stdout
+ */
 
-int	ft_print_char(int c)
+#include <unistd.h>
+
+/**
+ * @brief Print a character to stdout
+ * @param c The character to be printed
+ * @return int The number of characters printed
+ */
+int	ft_putchar(char c)
 {
-	ft_putchar((char)c);
-	return (ft_strlen((const char *)&c));
+	return (write(1, &c, 1));
 }
