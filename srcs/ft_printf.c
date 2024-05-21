@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/20 10:05:49 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/21 16:57:29 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@
  * @param args The arguments to be formatted
  * @return int The number of characters printed
  */
-static int	handle_specifier(char specifier, va_list args)
+static int	handle_specifier(char specifier, va_list *args)
 {
 	if (specifier == SPEC_CHAR)
-		return (ft_putchar(va_arg(args, int)));
+		return (ft_putchar(va_arg(*args, int)));
 	else if (specifier == SPEC_STRING)
-		return (ft_putstr(va_arg(args, char *)));
+		return (ft_putstr(va_arg(*args, char *)));
 	else if (specifier == SPEC_POINTER)
-		return (ft_putptr(va_arg(args, unsigned long)));
+		return (ft_putptr(va_arg(*args, unsigned long)));
 	else if (specifier == SPEC_DECIMAL || specifier == SPEC_INTEGER)
-		return (ft_putnbr(va_arg(args, int)));
+		return (ft_putnbr(va_arg(*args, int)));
 	else if (specifier == SPEC_UNSIGNED)
-		return (ft_putunbr(va_arg(args, unsigned int)));
+		return (ft_putunbr(va_arg(*args, unsigned int)));
 	else if (specifier == SPEC_HEX_LOW)
-		return (ft_puthex(va_arg(args, unsigned int), 0));
+		return (ft_puthex(va_arg(*args, unsigned int), 0));
 	else if (specifier == SPEC_HEX_UP)
-		return (ft_puthex(va_arg(args, unsigned int), 1));
+		return (ft_puthex(va_arg(*args, unsigned int), 1));
 	else if (specifier == SPEC_PERCENT)
 		return (ft_putchar('%'));
 	return (0);
@@ -65,7 +65,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
-			len += handle_specifier(format[i], args);
+			len += handle_specifier(format[i], &args);
 		}
 		else
 		{
@@ -77,4 +77,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
