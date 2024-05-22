@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:10:05 by welee             #+#    #+#             */
-/*   Updated: 2024/05/20 10:05:31 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/22 09:59:11 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,27 @@
  * @param uppercase Whether to print the number in uppercase
  * @return int The number of characters printed
  */
-int	ft_puthex(unsigned int n, int uppercase)
+int	ft_puthex(unsigned long long num, int is_upper)
 {
+	char	*hex_digits;
+	char	buffer[17];
 	int		len;
-	char	*hex;
+	int		i;
 
-	len = 0;
-	if (uppercase)
-		hex = "0123456789ABCDEF";
+	if (is_upper)
+		hex_digits = "0123456789ABCDEF";
 	else
-		hex = "0123456789abcdef";
-	if (n >= 16)
+		hex_digits = "0123456789abcdef";
+	len = 0;
+	if (num == 0)
+		return (ft_putchar('0'));
+	while (num)
 	{
-		len += ft_puthex(n / 16, uppercase);
-		n %= 16;
+		buffer[len++] = hex_digits[num % 16];
+		num /= 16;
 	}
-	ft_putchar(hex[n]);
-	return (++len);
+	i = len;
+	while (i--)
+		ft_putchar(buffer[i]);
+	return (len);
 }

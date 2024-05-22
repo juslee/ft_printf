@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:11:45 by welee             #+#    #+#             */
-/*   Updated: 2024/05/19 19:14:16 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/22 10:03:59 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
  * @param ptr The pointer to be printed
  * @return int The number of characters printed
  */
-int	ft_putptr(unsigned long ptr)
+int	ft_putptr(void *ptr)
 {
-	int	len;
+	int				len;
+	unsigned long	address;
 
 	len = 0;
-	if (!ptr)
-		return (ft_putstr("(nil)"));
+	address = (long)ptr;
 	len += ft_putstr("0x");
-	len += ft_puthex(ptr, 0);
+	len += ft_puthex(address, 0);
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:26:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/20 10:02:22 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/22 09:57:59 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		ft_putchar(char c);
 int		ft_putstr(char *str);
 int		ft_putnbr(int n);
 int		ft_putunbr(unsigned int n);
-int		ft_puthex(unsigned int n, int uppercase);
-int		ft_putptr(unsigned long ptr);
+int		ft_puthex(unsigned long long n, int is_upper);
+int		ft_putptr(void *ptr);
 char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int n);
 void	ft_convert_base(char *str, long long n, int len, int base);

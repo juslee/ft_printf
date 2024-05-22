@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/21 16:57:29 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/22 09:36:37 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	handle_specifier(char specifier, va_list *args)
 	else if (specifier == SPEC_STRING)
 		return (ft_putstr(va_arg(*args, char *)));
 	else if (specifier == SPEC_POINTER)
-		return (ft_putptr(va_arg(*args, unsigned long)));
+		return (ft_putptr(va_arg(*args, void *)));
 	else if (specifier == SPEC_DECIMAL || specifier == SPEC_INTEGER)
 		return (ft_putnbr(va_arg(*args, int)));
 	else if (specifier == SPEC_UNSIGNED)

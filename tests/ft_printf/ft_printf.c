@@ -6,11 +6,13 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:07:08 by welee             #+#    #+#             */
-/*   Updated: 2024/05/20 20:43:36 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/22 10:02:47 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
+#include <stdio.h>
 
 int	main(void)
 {
@@ -23,6 +25,10 @@ int	main(void)
 	ft_printf("Pointer: %p\n", (void *)1234);
 	ft_printf("Percent: %%\n");
 	ft_printf("Character: %c %c\n", 'A', 'B');
+	ft_printf("Pointer: %p %p\n", LONG_MIN, LONG_MAX);
+	printf("Pointer: %p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
+	ft_printf("Pointer: %p %p \n", 0, 0);
+	printf("Pointer: %p %p \n", (void *)0, (void *)0);
 
 	return (0);
 }
