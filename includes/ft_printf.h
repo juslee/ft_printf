@@ -6,12 +6,13 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:26:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/22 09:57:59 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/24 12:53:29 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+# include <stdarg.h>
 
 # define SPEC_CHAR 'c'
 # define SPEC_STRING 's'
@@ -24,6 +25,7 @@
 # define SPEC_PERCENT '%'
 
 int		ft_printf(const char *format, ...);
+int		ft_vprintf(const char *format, va_list args);
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
 int		ft_putnbr(int n);

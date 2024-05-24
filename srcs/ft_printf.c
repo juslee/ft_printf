@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/22 09:36:37 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/24 12:52:32 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,43 @@ static int	handle_specifier(char specifier, va_list *args)
 /**
  * @brief Print formatted string to stdout
  * @param format The format string
+ * @param args The arguments to be formatted
+ * @return int The number of characters printed
+ */
+int	ft_vprintf(const char *format, va_list args)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = 0;
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			++i;
+			len += handle_specifier(format[i], &args);
+		}
+		else
+			len += ft_putchar(format[i]);
+		++i;
+	}
+	return (len);
+}
+
+/**
+ * @brief Print formatted string to stdout
+ * @param format The format string
  * @param ... The arguments to be formatted
  * @return int The number of characters printed
  */
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		i;
 	int		len;
 
 	va_start(args, format);
-	i = 0;
-	len = 0;
-	while (format[i])
-	{
-		if (format[i] == '%' && format[i + 1])
-		{
-			i++;
-			len += handle_specifier(format[i], &args);
-		}
-		else
-		{
-			ft_putchar(format[i]);
-			len++;
-		}
-		i++;
-	}
+	len = ft_vprintf(format, args);
 	va_end(args);
 	return (len);
 }
