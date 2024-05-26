@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 09:55:05 by welee             #+#    #+#              #
-#    Updated: 2024/05/20 19:32:25 by welee            ###   ########.fr        #
+#    Updated: 2024/05/26 16:14:30 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,14 @@ ifeq ($(UNAME), Darwin)
 	VALGRIND = leaks --atExit --list --
 else ifeq ($(UNAME), Linux)
 # Linux specific settings
-	VALGRIND = valgrind --
+	VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 endif
 
 all: $(EXECS)
 %: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 	$@
-#	$(VALGRIND) $@
+	$(VALGRIND) $@
 	$(RM) $@
 clean:
 	${RM} $(OBJS) $(EXECS)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_nbr.c                                         :+:      :+:    :+:   */
+/*   test_hex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 14:54:23 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:20:51 by welee            ###   ########.fr       */
+/*   Created: 2024/05/26 18:18:44 by welee             #+#    #+#             */
+/*   Updated: 2024/05/26 18:23:07 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	run_test(void (*test_func)(void), const char *test_name)
 	printf("%s passed!\n", test_name);
 }
 
-void	test_decimal(void)
+void	test_hex_lowercase(void)
 {
-	const char	*format = "Number: %d";
-	const int	input = 42;
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Hex: %x";
+	const unsigned int	input = 255;
+	char				buf_ft_printf[100];
+	char				buf_printf[100];
 
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
@@ -69,12 +69,12 @@ void	test_decimal(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_integer(void)
+void	test_hex_uppercase(void)
 {
-	const char	*format = "Integer: %i";
-	const int	input = -42;
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Hex: %X";
+	const unsigned int	input = 255;
+	char				buf_ft_printf[100];
+	char				buf_printf[100];
 
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
@@ -83,60 +83,15 @@ void	test_integer(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_unsigned(void)
+void	test_hex(void)
 {
-	const char		*format = "Unsigned: %u";
-	unsigned int	input = 42;
-	char			buf_ft_printf[100];
-	char			buf_printf[100];
-
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_large_number(void)
-{
-	const char	*format = "Large: %d";
-	const int	input = INT_MAX;
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
-
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_negative_large_number(void)
-{
-	const char	*format = "Negative Large: %d";
-	const int	input = INT_MIN;
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
-
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void test_numbers(void)
-{
-	run_test(test_decimal, "test_decimal");
-	run_test(test_integer, "test_integer");
-	run_test(test_unsigned, "test_unsigned");
-	run_test(test_large_number, "test_large_number");
-	run_test(test_negative_large_number, "test_negative_large_number");
+	run_test(test_hex_lowercase, "test_hex_lowercase");
+	run_test(test_hex_uppercase, "test_hex_uppercase");
 }
 
 int	main(void)
 {
-	test_numbers();
+	test_hex();
 	printf("All tests passed!\n");
 	return (0);
 }

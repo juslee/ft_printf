@@ -6,13 +6,14 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:26:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/24 12:53:29 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 16:51:01 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
+# include <stddef.h>
 
 # define SPEC_CHAR 'c'
 # define SPEC_STRING 's'
@@ -26,14 +27,19 @@
 
 int		ft_printf(const char *format, ...);
 int		ft_vprintf(const char *format, va_list args);
+int		ft_handle_format(const char **format, va_list *args);
+
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
 int		ft_putnbr(int n);
 int		ft_putunbr(unsigned int n);
 int		ft_puthex(unsigned long long n, int is_upper);
 int		ft_putptr(void *ptr);
+
 char	*ft_itoa(int n);
 char	*ft_utoa(unsigned int n);
 void	ft_convert_base(char *str, long long n, int len, int base);
 int		ft_numlen_base(long long n, int base);
+size_t	ft_strlen(const char *s);
+size_t	ft_ptrlen(void *ptr);
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_nbr.c                                         :+:      :+:    :+:   */
+/*   test_str_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 14:54:23 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:20:51 by welee            ###   ########.fr       */
+/*   Created: 2024/05/20 19:21:59 by welee             #+#    #+#             */
+/*   Updated: 2024/05/26 15:34:46 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
-#include <limits.h>
 #include <assert.h>
 #include "ft_printf.h"
 
@@ -55,13 +54,15 @@ void	run_test(void (*test_func)(void), const char *test_name)
 	printf("%s passed!\n", test_name);
 }
 
-void	test_decimal(void)
+void	test_str_left_align(void)
 {
-	const char	*format = "Number: %d";
-	const int	input = 42;
+	const char	*format = "Hello %-10s!\n";
+	const char	*input = "world";
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
 
+	ft_printf(format, input);
+	printf(format, input);
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
 		== capture_output(1,
@@ -69,13 +70,15 @@ void	test_decimal(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_integer(void)
+void	test_str_right_align(void)
 {
-	const char	*format = "Integer: %i";
-	const int	input = -42;
+	const char	*format = "Hello %10s!\n";
+	const char	*input = "world";
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
 
+	ft_printf(format, input);
+	printf(format, input);
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
 		== capture_output(1,
@@ -83,27 +86,15 @@ void	test_integer(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_unsigned(void)
+void	test_str_zero_padded(void)
 {
-	const char		*format = "Unsigned: %u";
-	unsigned int	input = 42;
-	char			buf_ft_printf[100];
-	char			buf_printf[100];
-
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_large_number(void)
-{
-	const char	*format = "Large: %d";
-	const int	input = INT_MAX;
+	const char	*format = "Hello %010s!\n";
+	const char	*input = "world";
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
 
+	ft_printf(format, input);
+	printf(format, input);
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
 		== capture_output(1,
@@ -111,13 +102,15 @@ void	test_large_number(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_negative_large_number(void)
+void	test_str_left_align_zero_padded(void)
 {
-	const char	*format = "Negative Large: %d";
-	const int	input = INT_MIN;
+	const char	*format = "Hello %-010s!\n";
+	const char	*input = "world";
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
 
+	ft_printf(format, input);
+	printf(format, input);
 	assert(capture_output(0,
 			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
 		== capture_output(1,
@@ -125,18 +118,82 @@ void	test_negative_large_number(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void test_numbers(void)
+void	test_str_zero_padded_left_align(void)
 {
-	run_test(test_decimal, "test_decimal");
-	run_test(test_integer, "test_integer");
-	run_test(test_unsigned, "test_unsigned");
-	run_test(test_large_number, "test_large_number");
-	run_test(test_negative_large_number, "test_negative_large_number");
+	const char	*format = "Hello %0-10s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+
+	ft_printf(format, input);
+	printf(format, input);
+	assert(capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
+		== capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input));
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str_zero_padded_left_align_all_flags(void)
+{
+	const char	*format = "Hello %0-# +10s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+
+	ft_printf(format, input);
+	printf(format, input);
+	assert(capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
+		== capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input));
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str_zero_padded_multiple_str(void)
+{
+	const char	*format = "Hello %0-# +10s! %0-# +10s! %0-# +10s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str(void)
+{
+	run_test(test_str_left_align,
+		"test_str_left_align");
+	run_test(test_str_right_align,
+		"test_str_right_align");
+	run_test(test_str_zero_padded,
+		"test_str_zero_padded");
+	run_test(test_str_left_align_zero_padded,
+		"test_str_left_align_zero_padded");
+	run_test(test_str_zero_padded_left_align,
+		"test_str_zero_padded_left_align");
+	run_test(test_str_zero_padded_left_align_all_flags,
+		"test_str_zero_padded_left_align_all_flags");
+	run_test(test_str_zero_padded_multiple_str,
+		"test_str_zero_padded_multiple_str");
 }
 
 int	main(void)
 {
-	test_numbers();
+	test_str();
 	printf("All tests passed!\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:42:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/24 14:50:29 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 15:50:17 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	test_ptr_llong_min(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_str_llong_max(void)
+void	test_ptr_llong_max(void)
 {
 	const char	*format = "Pointer: %p";
 	const void	*input = (void *)LLONG_MAX;
@@ -145,7 +145,7 @@ void	test_ptr(void)
 	run_test(test_null_ptr, "test_null_ptr");
 	run_test(test_ptr_edge_case, "test_ptr_edge_case");
 	run_test(test_ptr_llong_min, "test_ptr_long_min");
-	run_test(test_str_llong_max, "test_str_long_max");
+	run_test(test_ptr_llong_max, "test_str_long_max");
 	run_test(test_pointer_array, "test_pointer_array");
 }
 

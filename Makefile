@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/05/20 19:19:34 by welee            ###   ########.fr        #
+#    Updated: 2024/05/26 09:17:26 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ FRANCINETTE = francinette
 FRANCINETTE_FLAGS = -s
 WHOAMI = whoami
 
-SRCS = $(shell find $(SRCS_DIR) -name '*.c')
+SRCS = $(shell find $(SRCS_DIR) -name '*.c' ! -name '*_bonus.c')
+BSRCS = $(shell find $(SRCS_DIR) -name '*.c' ! -name 'ft_handle_format.c')
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+BOBJS = $(BSRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 HEADERS = $(wildcard $(INCLUDES_DIR)/ft_*.h)
 
 NORM = norminette
@@ -44,18 +46,22 @@ NORM_FLAGS = -R CheckForbiddenSourceHeader -R CheckDefine
 DOXYGEN = doxygen
 DOXYGEN_CONFIG = Doxyfile
 
-all: ${NAME}
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MKDIR) $(BIN_DIR)
 	$(LIBC) $(BIN_DIR)/$(NAME) $(OBJS)
+
+bonus: $(BOBJS)
+	$(MKDIR) $(BIN_DIR)
+	$(LIBC) $(BIN_DIR)/$(NAME) $(BOBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(MKDIR) $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
 	$(RM) $(BIN_DIR)/$(NAME)
@@ -73,6 +79,9 @@ norm:
 	$(NORM) $(NORM_FLAGS) $(SRCS_DIR) $(INCLUDES_DIR)
 
 tests: all
+	$(MAKE) $(TEST_DIR) all
+
+tests_bonus: bonus
 	$(MAKE) $(TEST_DIR) all
 
 docs:
