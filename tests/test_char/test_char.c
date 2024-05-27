@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 19:21:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/24 14:11:49 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:15:54 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <assert.h>
 #include "ft_printf.h"
+#include "ft_printf_util.h"
 
 int	capture_output(int printf, char *buf, size_t size, const char *format, ...)
 {

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:42:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 15:50:17 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:15:05 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <limits.h>
 #include <assert.h>
 #include "ft_printf.h"
+#include "ft_printf_util.h"
 
 int	capture_output(int printf, char *buf, size_t size, const char *format, ...)
 {
@@ -57,85 +58,127 @@ void	run_test(void (*test_func)(void), const char *test_name)
 
 void	test_basic_ptr(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const int	input = 42;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, &input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, &input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_null_ptr(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const int	*input = {0};
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, &input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, &input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_ptr_edge_case(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const void	*input = (void *)0xFFFFFFFFFFFFFFFF;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_ptr_llong_min(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const void	*input = (void *)LLONG_MIN;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_ptr_llong_max(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const void	*input = (void *)LLONG_MAX;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_pointer_array(void)
 {
-	const char	*format = "Pointer: %p";
+	const char	*format = "Pointer: %p\n";
 	const int	input[] = {1, 2, 3};
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input[0], input[1], input[2])
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input[0], input[1], input[2]));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 

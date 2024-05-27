@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:11:45 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:08 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:15:25 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_putptr(void *ptr)
 	int				len;
 	unsigned long	address;
 
-	len = 2;
+	len = 0;
 	address = (long)ptr;
 	len += ft_putstr("0x");
 	len += ft_puthex(address, 0);
