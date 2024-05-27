@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 00:45:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 20:20:49 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:56:20 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
  * @brief Handle the specifier and print the formatted string
  */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 
 /**
  * @brief Handle the specifier and print the formatted string

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 01:23:53 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:04:13 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:59:09 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
  * @brief The function to parse the format string
  */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 
 /**
  * @brief Initialize the format info struct
@@ -35,6 +35,7 @@ t_format_info	ft_init_format_info(void)
 	format_info.space = 0;
 	format_info.show_sign = 0;
 	format_info.width = 0;
+	format_info.precision = -1;
 	format_info.specifier = 0;
 	return (format_info);
 }
@@ -79,6 +80,26 @@ void	ft_parse_width(const char **format, t_format_info *format_info)
 }
 
 /**
+ * @brief Parse the precision from the format string
+ * @param format The format string
+ * @param format_info The format info struct to store the parsed precision
+ */
+void	ft_parse_precision(const char **format, t_format_info *format_info)
+{
+	if (**format == '.')
+	{
+		format_info->precision = 0;
+		(*format)++;
+		while (**format >= '0' && **format <= '9')
+		{
+			format_info->precision =
+				format_info->precision * 10 + (**format - '0');
+			(*format)++;
+		}
+	}
+}
+
+/**
  * @brief Parse the specifier from the format string
  * @param format The format string
  * @param format_info The format info struct to store the parsed specifier
@@ -107,6 +128,7 @@ t_format_info	ft_parse_format(const char **format)
 	format_info = ft_init_format_info();
 	ft_parse_flags(format, &format_info);
 	ft_parse_width(format, &format_info);
+	ft_parse_precision(format, &format_info);
 	ft_parse_specifier(format, &format_info);
 	return (format_info);
 }

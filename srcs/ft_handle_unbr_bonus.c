@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 20:15:43 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 20:38:11 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:58:40 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
  * @brief Handle the unsigned integer specifier
  */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 #include <stdlib.h>
 
 /**

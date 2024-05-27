@@ -6,12 +6,12 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 18:03:48 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 20:23:08 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:57:13 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 
 static void	handle_hex_prefix(t_format_info format_info, int is_upper)
 {

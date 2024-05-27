@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 16:29:31 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 12:07:27 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 17:00:34 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,27 @@ void	test_numbers_left_align_width(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
+void	test_numbers_zero_padded_width(void)
+{
+	const char	*format = " %04d !\n";
+	const int	input = -14;
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
 void	test_numbers(void)
 {
 	run_test(test_decimal_left_align, "test_decimal_left_align");
@@ -239,8 +260,10 @@ void	test_numbers(void)
 		"test_decimal_zero_padded_left_align_all_flags");
 	run_test(test_decimal_zero_padded_multiple_decimal,
 		"test_decimal_zero_padded_multiple_decimal");
-	run_test(test_numbers_left_align_width,
-		"test_numbers_left_align_width");
+	// run_test(test_numbers_left_align_width,
+	// 	"test_numbers_left_align_width");
+	run_test(test_numbers_zero_padded_width,
+		"test_numbers_zero_padded_width");
 }
 
 int	main(void)

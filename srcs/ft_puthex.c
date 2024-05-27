@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:10:05 by welee             #+#    #+#             */
-/*   Updated: 2024/05/22 09:59:11 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:01:31 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  * @brief The function that prints a hexadecimal number to stdout
  */
 
-#include "ft_printf.h"
+#include "ft_printf_util.h"
 
 /**
  * @brief Print a hexadecimal number to stdout

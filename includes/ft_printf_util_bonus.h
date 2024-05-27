@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
+/*   ft_printf_util_bonus.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 19:10:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 14:45:54 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:54:47 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_format_info
 	int		space;
 	int		show_sign;
 	int		width;
+	int		precision;
 	char	specifier;
 }	t_format_info;
 

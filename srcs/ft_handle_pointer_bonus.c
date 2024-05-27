@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:21:33 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 11:40:47 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:57:42 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
  * @brief Handle the pointer specifier
  */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 
 /**
  * @brief Handle the pointer specifier

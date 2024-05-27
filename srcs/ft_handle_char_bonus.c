@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:15:25 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:16:46 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 18:55:42 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
  * @brief Handle the character specifier
  */
 
-#include "ft_printf.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf_util.h"
+#include "ft_printf_util_bonus.h"
 
 /**
  * @brief Handle the character specifier
@@ -24,7 +24,7 @@
  * @param format_info The format information
  * @return int The number of characters printed
  * @note The format information is as follows:
- * ['-' | '0'][width][c]
+ * ['-'][width][c]
  */
 int	ft_handle_char(int c, t_format_info format_info)
 {
