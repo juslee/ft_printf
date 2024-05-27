@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:42:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/24 14:11:21 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 09:20:23 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,24 @@ void	test_empty_str(void)
 
 void	test_null_string(void)
 {
-	const char	*format = "Null string: %s";
+	const char	*format = "Null string: %s\n";
 	const char	*input = NULL;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 

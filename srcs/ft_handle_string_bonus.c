@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:19:45 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:20:19 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 09:19:44 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_handle_string(char *str, t_format_info format_info)
 {
 	int	len;
 
+	if (!str)
+		str = "(null)";
 	len = ft_strlen(str);
 	if (!format_info.left_align && format_info.width > len)
 		ft_print_padding(format_info.width, len, format_info.zero_padded);
