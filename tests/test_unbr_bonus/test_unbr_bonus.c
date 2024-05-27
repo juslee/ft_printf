@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_ptr_bonus.c                                   :+:      :+:    :+:   */
+/*   test_unbr_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 15:11:10 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 19:59:31 by welee            ###   ########.fr       */
+/*   Created: 2024/05/26 20:39:06 by welee             #+#    #+#             */
+/*   Updated: 2024/05/26 20:49:35 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
+#include <limits.h>
 #include <assert.h>
 #include "ft_printf.h"
 
@@ -54,33 +55,12 @@ void	run_test(void (*test_func)(void), const char *test_name)
 	printf("%s passed!\n", test_name);
 }
 
-void	test_ptr_left_align(void)
+void	test_unsigned_left_align(void)
 {
-	const char	*format = "Hello %-12p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
-	int			ft_printf_len;
-	int			printf_len;
-
-	ft_printf(format, input);
-	printf(format, input);
-	ft_printf_len = capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
-	printf_len = capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input);
-	printf("ft_printf_len: %d\n", ft_printf_len);
-	printf("printf_len: %d\n", printf_len);
-	assert(ft_printf_len == printf_len);
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_ptr_right_align(void)
-{
-	const char	*format = "Hello %12p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %-5u\n";
+	const unsigned int	input = 42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -91,12 +71,12 @@ void	test_ptr_right_align(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr_zero_padded(void)
+void	test_unsigned_zero_padding(void)
 {
-	const char	*format = "Hello %012p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %05u!\n";
+	const unsigned int	input = 42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -107,12 +87,12 @@ void	test_ptr_zero_padded(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr_left_align_zero_padded(void)
+void	test_unsigned_right_align(void)
 {
-	const char	*format = "Hello %-012p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %5u!\n";
+	const unsigned int	input = 42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -123,12 +103,12 @@ void	test_ptr_left_align_zero_padded(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr_zero_padded_left_align(void)
+void	test_unsigned_left_align_zero_padded(void)
 {
-	const char	*format = "Hello %0-12p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %-05u!\n";
+	const unsigned int	input = 42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -139,12 +119,12 @@ void	test_ptr_zero_padded_left_align(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr_zero_left_align_all_flags(void)
+void	test_unsigned_zero_padded_left_align(void)
 {
-	const char	*format = "Hello %0-# +12p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %0-5u!\n";
+	const unsigned int	input = 42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -155,30 +135,12 @@ void	test_ptr_zero_left_align_all_flags(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr_zero_padded_multiple_str(void)
+void	test_unsigned_all_flags(void)
 {
-	const char	*format = "Hello %0-# +10s! %0-# +10s! %0-# +10s!\n";
-	const char	*input[] = {"world", "world", "world"};
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
-
-	ft_printf(format, input);
-	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
-			input[0], input[1], input[2])
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format,
-			input[0], input[1], input[2]));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_ptr_plus_flag(void)
-{
-	const char	*format = "Hello %+p!\n";
-	const char	*input = "world";
-	char		buf_ft_printf[100];
-	char		buf_printf[100];
+	const char			*format = "Unsigned: %#-0 +5u!\n";
+	const unsigned int	input = -42;
+	char			buf_ft_printf[100];
+	char			buf_printf[100];
 
 	ft_printf(format, input);
 	printf(format, input);
@@ -189,29 +151,23 @@ void	test_ptr_plus_flag(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
-void	test_ptr(void)
+void	test_unbr(void)
 {
-	run_test(test_ptr_left_align,
-		"test_ptr_left_align");
-	run_test(test_ptr_right_align,
-		"test_ptr_right_align");
-	run_test(test_ptr_zero_padded,
-		"test_ptr_zero_padded");
-	run_test(test_ptr_left_align_zero_padded,
-		"test_ptr_left_align_zero_padded");
-	run_test(test_ptr_zero_padded_left_align,
-		"test_ptr_zero_padded_left_align");
-	run_test(test_ptr_zero_left_align_all_flags,
-		"test_ptr_zero_left_align_all_flags");
-	run_test(test_ptr_zero_padded_multiple_str,
-		"test_ptr_zero_padded_multiple_str");
-	run_test(test_ptr_plus_flag,
-		"test_ptr_plus_flag");
+	run_test(test_unsigned_left_align, "test_unsigned_left_align");
+	run_test(test_unsigned_zero_padding, "test_unsigned_zero_padding");
+	run_test(test_unsigned_right_align, "test_unsigned_right_align");
+	run_test(test_unsigned_left_align_zero_padded,
+		"test_unsigned_left_align_zero_padded");
+	run_test(test_unsigned_zero_padded_left_align,
+		"test_unsigned_zero_padded_left_align");
+	run_test(test_unsigned_all_flags, "test_unsigned_all_flags");
 }
 
 int	main(void)
 {
-	test_ptr();
+	test_unbr();
 	printf("All tests passed!\n");
 	return (0);
 }
+
+

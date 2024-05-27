@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 00:45:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:58:44 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 20:20:49 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ int	ft_handle_format(const char **format, va_list *args)
 				va_arg(*args, void *), format_info));
 	else if (format_info.specifier == SPEC_DECIMAL
 		|| format_info.specifier == SPEC_INTEGER)
-		return (ft_handle_int(va_arg(*args, int), format_info));
-	// else if (format_info.specifier == SPEC_UNSIGNED)
-	// 	return (ft_handle_unsigned_int(
-	// 			va_arg(*args, unsigned int), format_info));
+		return (ft_handle_nbr(va_arg(*args, int), format_info));
+	else if (format_info.specifier == SPEC_UNSIGNED)
+		return (ft_handle_unbr(va_arg(*args, unsigned int), format_info));
 	else if (format_info.specifier == SPEC_HEX_LOW)
-		return (ft_handle_hex(va_arg(*args, unsigned int), format_info, 0));
+		return (ft_handle_hex(va_arg(*args, unsigned int), format_info,
+				HEX_LOWER));
 	else if (format_info.specifier == SPEC_HEX_UP)
-		return (ft_handle_hex(va_arg(*args, unsigned int), format_info, 1));
+		return (ft_handle_hex(va_arg(*args, unsigned int), format_info,
+				HEX_UPPER));
 	else if (format_info.specifier == SPEC_PERCENT)
 		return (ft_putchar('%'));
 	return (0);

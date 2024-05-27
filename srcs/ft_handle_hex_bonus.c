@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 18:03:48 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:16:56 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 20:23:08 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ static void	handle_left_padding(t_format_info format_info, int len)
 		ft_print_padding(format_info.width, len, 0);
 }
 
+/**
+ * @brief Handle the hexadecimal specifier
+ * @param num The number to be printed
+ * @param format_info The format information
+ * @param is_upper Whether the output should be in uppercase
+ * @return int The number of characters printed
+ * @note The format information is as follows:
+ * ['#' | '-' | '0' | ' ' | '+'][width][X | x]
+ */
 int	ft_handle_hex(unsigned long long num, t_format_info format_info,
 	int is_upper)
 {

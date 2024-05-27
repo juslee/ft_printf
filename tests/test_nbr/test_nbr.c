@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:54:23 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:20:51 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 20:55:29 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,71 +57,85 @@ void	run_test(void (*test_func)(void), const char *test_name)
 
 void	test_decimal(void)
 {
-	const char	*format = "Number: %d";
+	const char	*format = "Number: %d\n";
 	const int	input = 42;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_integer(void)
 {
-	const char	*format = "Integer: %i";
+	const char	*format = "Integer: %i\n";
 	const int	input = -42;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
-	assert(strcmp(buf_ft_printf, buf_printf) == 0);
-}
-
-void	test_unsigned(void)
-{
-	const char		*format = "Unsigned: %u";
-	unsigned int	input = 42;
-	char			buf_ft_printf[100];
-	char			buf_printf[100];
-
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_large_number(void)
 {
-	const char	*format = "Large: %d";
+	const char	*format = "Large: %d\n";
 	const int	input = INT_MAX;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
 void	test_negative_large_number(void)
 {
-	const char	*format = "Negative Large: %d";
+	const char	*format = "Negative Large: %d\n";
 	const int	input = INT_MIN;
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -129,7 +143,6 @@ void test_numbers(void)
 {
 	run_test(test_decimal, "test_decimal");
 	run_test(test_integer, "test_integer");
-	run_test(test_unsigned, "test_unsigned");
 	run_test(test_large_number, "test_large_number");
 	run_test(test_negative_large_number, "test_negative_large_number");
 }

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 18:18:44 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:23:07 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 18:40:32 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,34 @@ void	test_hex_uppercase(void)
 {
 	const char			*format = "Hex: %X";
 	const unsigned int	input = 255;
+	char				buf_ft_printf[100];
+	char				buf_printf[100];
+
+	assert(capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
+		== capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input));
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_hex_llong_min(void)
+{
+	const char			*format = "Hex: %x";
+	const long long		input = LLONG_MIN;
+	char				buf_ft_printf[100];
+	char				buf_printf[100];
+
+	assert(capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
+		== capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input));
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_hex_llong_max(void)
+{
+	const char			*format = "Hex: %x";
+	const long long		input = LLONG_MAX;
 	char				buf_ft_printf[100];
 	char				buf_printf[100];
 

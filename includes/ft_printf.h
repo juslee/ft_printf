@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:26:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 16:51:01 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 20:20:00 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define SPEC_HEX_LOW 'x'
 # define SPEC_HEX_UP 'X'
 # define SPEC_PERCENT '%'
+
+# define HEX_LOWER 0
+# define HEX_UPPER 1
 
 int		ft_printf(const char *format, ...);
 int		ft_vprintf(const char *format, va_list args);

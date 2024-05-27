@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 19:10:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 18:16:12 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/26 20:19:16 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void			ft_print_padding(int width, int len, int zero_pad);
 int				ft_handle_char(int c, t_format_info format_info);
 int				ft_handle_string(char *str, t_format_info format_info);
 int				ft_handle_pointer(void *ptr, t_format_info format_info);
-int				ft_handle_int(int n, t_format_info format_info);
-int				ft_handle_uint(unsigned int n, t_format_info format_info);
+int				ft_handle_nbr(int n, t_format_info format_info);
+int				ft_handle_unbr(unsigned int n, t_format_info format_info);
 int				ft_handle_hex(unsigned long long n, t_format_info format_info,
 					int is_upper);
 int				ft_handle_percent(t_format_info format_info);
