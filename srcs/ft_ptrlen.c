@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 16:33:39 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 16:54:41 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 11:24:57 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
  */
 size_t	ft_ptrlen(void *ptr)
 {
-	size_t	len;
 	unsigned long long	address;
+	size_t				len;
 
 	len = 2;
 	address = (long)ptr;

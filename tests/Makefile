@@ -6,14 +6,17 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 09:55:05 by welee             #+#    #+#              #
-#    Updated: 2024/05/26 16:14:30 by welee            ###   ########.fr        #
+#    Updated: 2024/05/27 10:38:42 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = tests
-SRCS = $(shell find . -name '*.c')
+SRCS = $(shell find . -name '*.c' ! -name '*_bonus.c')
+BSRCS = $(shell find . -name '*.c' ! -name 'ft_handle_format.c')
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
 EXECS = $(SRCS:.c=)
+BEXECS = $(BSRCS:.c=)
 INCLUDES = -I ../includes
 
 CC = cc
@@ -35,8 +38,9 @@ all: $(EXECS)
 	$@
 	$(VALGRIND) $@
 	$(RM) $@
+bonus: $(BEXECS)
 clean:
-	${RM} $(OBJS) $(EXECS)
+	${RM} $(OBJS) $(EXECS) $(BOBJS) $(BEXECS)
 fclean: clean
 re: fclean all
 .PHONY: all clean fclean re

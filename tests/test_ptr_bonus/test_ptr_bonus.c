@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 15:11:10 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 19:59:31 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 11:13:44 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,27 @@ void	test_ptr_plus_flag(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
+void	test_ptr_left_align_width(void)
+{
+	const char	*format = " %-1p %-2p \n";
+	const int	input[] = {0, 0};
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input[0], input[1]);
+	printf(format, input[0], input[1]);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input[0], input[1]);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input[0], input[1]);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
 void	test_ptr(void)
 {
 	run_test(test_ptr_left_align,
@@ -207,6 +228,8 @@ void	test_ptr(void)
 		"test_ptr_zero_padded_multiple_str");
 	run_test(test_ptr_plus_flag,
 		"test_ptr_plus_flag");
+	run_test(test_ptr_left_align_width,
+		"test_ptr_left_align_width");
 }
 
 int	main(void)

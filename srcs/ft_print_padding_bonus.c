@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:13:42 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:14:44 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 14:47:56 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @param len The length of the string
  * @param zero_pad Whether to zero pad
  */
-void	ft_print_padding(int width, int len, int zero_pad)
+int	ft_print_padding(int width, int len, int zero_pad)
 {
 	char	pad_char;
 	int		i;
@@ -38,4 +38,5 @@ void	ft_print_padding(int width, int len, int zero_pad)
 		ft_putchar(pad_char);
 		i++;
 	}
+	return (i);
 }

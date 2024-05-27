@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 12:23:55 by welee             #+#    #+#              #
-#    Updated: 2024/05/21 16:58:20 by welee            ###   ########.fr        #
+#    Updated: 2024/05/27 10:40:27 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,19 @@ RM = rm -f
 MKDIR = mkdir -p
 
 SRCS = $(shell find . -name '*.c' ! -name '*_bonus.c')
-# BSRCS = $(shell find . -name '*_bonus.c')
+BSRCS = $(shell find . -name '*.c' ! -name 'ft_handle_format.c')
 OBJS = $(SRCS:%.c=%.o)
 BOBJS = $(BSRCS:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	$(RM) $(NAME)
 	${LIBC} ${NAME} ${OBJS}
+
+bonus: $(BOBJS)
+	$(RM) $(NAME)
+	${LIBC} ${NAME} ${BOBJS}
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -38,8 +43,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-# bonus: $(NAME) $(BOBJS)
-#	${LIBC} ${NAME} ${BOBJS}
 
 .PHONY: all clean fclean re bonus

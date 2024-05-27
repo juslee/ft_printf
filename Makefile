@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/05/26 09:17:26 by welee            ###   ########.fr        #
+#    Updated: 2024/05/27 10:41:49 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,12 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MKDIR) $(BIN_DIR)
+	$(RM) $(BIN_DIR)/$(NAME)
 	$(LIBC) $(BIN_DIR)/$(NAME) $(OBJS)
 
 bonus: $(BOBJS)
 	$(MKDIR) $(BIN_DIR)
+	$(RM) $(BIN_DIR)/$(NAME)
 	$(LIBC) $(BIN_DIR)/$(NAME) $(BOBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -70,7 +72,7 @@ re: fclean all dist
 
 dist:
 	@$(MKDIR) $(DIST_DIR)
-	@$(foreach src,$(SRCS),cp $(src) $(DIST_DIR);)
+	@$(foreach src,$(BSRCS),cp $(src) $(DIST_DIR);)
 	@find $(INCLUDES_DIR) -type f -exec cp {} $(DIST_DIR) \;
 	@$(CP) $(PUBLIC_DIR)/Makefile $(DIST_DIR)
 	@echo $(shell $(WHOAMI)) > $(DIST_DIR)/author
@@ -82,7 +84,7 @@ tests: all
 	$(MAKE) $(TEST_DIR) all
 
 tests_bonus: bonus
-	$(MAKE) $(TEST_DIR) all
+	$(MAKE) $(TEST_DIR) bonus
 
 docs:
 	${DOXYGEN} ${DOXYGEN_CONFIG}

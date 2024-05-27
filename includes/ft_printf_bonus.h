@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 19:10:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 20:19:16 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 14:45:54 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			ft_parse_width(const char **format, t_format_info *format_info);
 void			ft_parse_specifier(const char **format,
 					t_format_info *format_info);
 
-void			ft_print_padding(int width, int len, int zero_pad);
+int				ft_print_padding(int width, int len, int zero_pad);
 
 int				ft_handle_char(int c, t_format_info format_info);
 int				ft_handle_string(char *str, t_format_info format_info);

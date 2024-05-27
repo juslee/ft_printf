@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 17:21:33 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 17:21:47 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 11:40:47 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,35 @@
 /**
  * @brief Handle the pointer specifier
  * @param ptr The pointer to be printed
- * @param format_info The format information
+ * @param fi The format information
  * @return int The number of characters printed
  * @note The format information is as follows:
  * ['-' | '0'][width][p]
  */
-int	ft_handle_pointer(void *ptr, t_format_info format_info)
+int	ft_handle_pointer(void *ptr, t_format_info fi)
 {
-	int				len;
+	int		address_len;
+	int		total_len;
+	int		padded_len;
 
-	len = ft_ptrlen(ptr);
-	if (!format_info.left_align && format_info.width > len)
-	{
-		if (format_info.zero_padded)
-			ft_putstr("0x");
-		ft_print_padding(format_info.width,
-			len, format_info.zero_padded);
-		if (!format_info.zero_padded)
-			ft_putstr("0x");
-	}
+	if (ptr)
+		address_len = ft_ptrlen(ptr) - 2;
 	else
-		ft_putstr("0x");
+		address_len = 1;
+	total_len = address_len + 2;
+	padded_len = fi.width - total_len;
+	if (!fi.left_align && (!fi.zero_padded || ptr == 0) && padded_len > 0)
+		ft_print_padding(padded_len, 0, 0);
+	ft_putstr("0x");
+	if (!fi.left_align && fi.zero_padded && ptr != 0 && padded_len > 0)
+		ft_print_padding(padded_len, 0, 1);
 	if (ptr == 0)
 		ft_putchar('0');
 	else
-		ft_puthex((long)ptr, 0);
-	if (format_info.left_align && format_info.width > len)
-		ft_print_padding(format_info.width, len, 0);
-	if (format_info.width > len)
-		return (format_info.width);
-	return (len);
+		ft_puthex((unsigned long)ptr, 0);
+	if (fi.left_align && padded_len > 0)
+		ft_print_padding(padded_len, 0, 0);
+	if (padded_len > 0)
+		total_len += padded_len;
+	return (total_len);
 }
