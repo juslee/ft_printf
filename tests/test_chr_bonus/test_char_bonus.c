@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 19:21:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:09:14 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:51:47 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,18 @@ void	test_char_left_align(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -77,13 +82,18 @@ void	test_char_right_align(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -93,13 +103,18 @@ void	test_char_zero_padded(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -109,13 +124,18 @@ void	test_char_left_align_zero_padded(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -125,13 +145,18 @@ void	test_char_zero_padded_left_align(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -141,13 +166,18 @@ void	test_char_zero_left_align_all_flags(void)
 	const char	input = 'X';
 	char		buf_ft_printf[100];
 	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
 
 	ft_printf(format, input);
 	printf(format, input);
-	assert(capture_output(0,
-			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input)
-		== capture_output(1,
-			buf_printf, sizeof(buf_printf) - 1, format, input));
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
@@ -165,7 +195,6 @@ void	test_char(void)
 		"test_char_zero_padded_left_align");
 	run_test(test_char_zero_left_align_all_flags,
 		"test_char_zero_left_align_all_flags");
-
 }
 
 int	main(void)

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 19:21:59 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:10:30 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 20:51:22 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,98 @@ void	test_str_zero_padded_multiple_str(void)
 	assert(strcmp(buf_ft_printf, buf_printf) == 0);
 }
 
+void	test_str_precision_lower(void)
+{
+	const char	*format = "Strings: %.2s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str_precision_upper(void)
+{
+	const char	*format = "Strings: %.6s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str_width_precision(void)
+{
+	const char	*format = "Strings: %5.2s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
+void	test_str_width_precision_larger(void)
+{
+	const char	*format = "Strings: %2.5s!\n";
+	const char	*input = "world";
+	char		buf_ft_printf[100];
+	char		buf_printf[100];
+	int			ft_printf_len;
+	int			printf_len;
+
+	ft_printf(format, input);
+	printf(format, input);
+	ft_printf_len = capture_output(0,
+			buf_ft_printf, sizeof(buf_ft_printf) - 1, format,
+			input, input, input);
+	printf_len = capture_output(1,
+			buf_printf, sizeof(buf_printf) - 1, format,
+			input, input, input);
+	printf("ft_printf_len: %d\n", ft_printf_len);
+	printf("printf_len: %d\n", printf_len);
+	assert(ft_printf_len == printf_len);
+	assert(strcmp(buf_ft_printf, buf_printf) == 0);
+}
+
 void	test_str(void)
 {
 	run_test(test_str_left_align,
@@ -190,6 +282,14 @@ void	test_str(void)
 		"test_str_zero_padded_left_align_all_flags");
 	run_test(test_str_zero_padded_multiple_str,
 		"test_str_zero_padded_multiple_str");
+	run_test(test_str_precision_lower,
+		"test_str_precision_lower");
+	run_test(test_str_precision_upper,
+		"test_str_precision_upper");
+	run_test(test_str_width_precision,
+		"test_str_width_precision");
+	run_test(test_str_width_precision_larger,
+		"test_str_width_precision_larger");
 }
 
 int	main(void)

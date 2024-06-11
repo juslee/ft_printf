@@ -6,11 +6,12 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:07:08 by welee             #+#    #+#             */
-/*   Updated: 2024/05/22 10:02:47 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 19:57:51 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_printf_util.h"
 #include <limits.h>
 #include <stdio.h>
 
@@ -29,6 +30,7 @@ int	main(void)
 	printf("Pointer: %p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
 	ft_printf("Pointer: %p %p \n", 0, 0);
 	printf("Pointer: %p %p \n", (void *)0, (void *)0);
-
+	ft_printf("Hello %3c world\n", 'A');
+	printf("Hello %3c world\n", 'A');
 	return (0);
 }

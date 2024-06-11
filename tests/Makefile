@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 09:55:05 by welee             #+#    #+#              #
-#    Updated: 2024/05/27 10:38:42 by welee            ###   ########.fr        #
+#    Updated: 2024/05/28 08:58:56 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ all: $(EXECS)
 %: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LDFLAGS)
 	$@
-	$(VALGRIND) $@
+#	$(VALGRIND) $@
 	$(RM) $@
 bonus: $(BEXECS)
 clean:

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 00:45:00 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 18:56:20 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 21:48:52 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "ft_printf_util.h"
 #include "ft_printf_util_bonus.h"
+#include <stdio.h>
 
 /**
  * @brief Handle the specifier and print the formatted string
@@ -30,12 +31,11 @@ int	ft_handle_format(const char **format, va_list *args)
 
 	format_info = ft_parse_format(format);
 	if (format_info.specifier == SPEC_CHAR)
-		return (ft_handle_char(va_arg(*args, int), format_info));
+		return (ft_handle_chr(va_arg(*args, int), format_info));
 	else if (format_info.specifier == SPEC_STRING)
-		return (ft_handle_string(va_arg(*args, char *), format_info));
+		return (ft_handle_str(va_arg(*args, char *), format_info));
 	else if (format_info.specifier == SPEC_POINTER)
-		return (ft_handle_pointer(
-				va_arg(*args, void *), format_info));
+		return (ft_handle_ptr(va_arg(*args, void *), format_info));
 	else if (format_info.specifier == SPEC_DECIMAL
 		|| format_info.specifier == SPEC_INTEGER)
 		return (ft_handle_nbr(va_arg(*args, int), format_info));

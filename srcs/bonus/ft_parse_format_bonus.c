@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 01:23:53 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 18:59:09 by welee            ###   ########.fr       */
+/*   Updated: 2024/05/27 21:01:10 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,6 @@
 
 #include "ft_printf_util.h"
 #include "ft_printf_util_bonus.h"
-
-/**
- * @brief Initialize the format info struct
- * @return t_format_info The initialized format info struct
- * @note
- * format_info.precision = -1;
- * format_info.length_modifier = 0;
- */
-t_format_info	ft_init_format_info(void)
-{
-	t_format_info	format_info;
-
-	format_info.alternate_form = 0;
-	format_info.zero_padded = 0;
-	format_info.left_align = 0;
-	format_info.space = 0;
-	format_info.show_sign = 0;
-	format_info.width = 0;
-	format_info.precision = -1;
-	format_info.specifier = 0;
-	return (format_info);
-}
 
 /**
  * @brief Parse the flags from the format string
@@ -92,8 +70,8 @@ void	ft_parse_precision(const char **format, t_format_info *format_info)
 		(*format)++;
 		while (**format >= '0' && **format <= '9')
 		{
-			format_info->precision =
-				format_info->precision * 10 + (**format - '0');
+			format_info->precision = format_info->precision
+				* 10 + (**format - '0');
 			(*format)++;
 		}
 	}
@@ -125,7 +103,14 @@ t_format_info	ft_parse_format(const char **format)
 {
 	t_format_info	format_info;
 
-	format_info = ft_init_format_info();
+	format_info.alternate_form = 0;
+	format_info.zero_padded = 0;
+	format_info.left_align = 0;
+	format_info.space = 0;
+	format_info.show_sign = 0;
+	format_info.width = 0;
+	format_info.precision = -1;
+	format_info.specifier = 0;
 	ft_parse_flags(format, &format_info);
 	ft_parse_width(format, &format_info);
 	ft_parse_precision(format, &format_info);
