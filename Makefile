@@ -6,7 +6,7 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/05/27 10:41:49 by welee            ###   ########.fr        #
+#    Updated: 2024/06/11 11:24:47 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ re: fclean all dist
 
 dist:
 	@$(MKDIR) $(DIST_DIR)
-	@$(foreach src,$(BSRCS),cp $(src) $(DIST_DIR);)
+	@$(foreach src,$(SRCS),cp $(src) $(DIST_DIR);)
 	@find $(INCLUDES_DIR) -type f -exec cp {} $(DIST_DIR) \;
 	@$(CP) $(PUBLIC_DIR)/Makefile $(DIST_DIR)
 	@echo $(shell $(WHOAMI)) > $(DIST_DIR)/author
