@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:10:05 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:01:31 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 09:35:43 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,35 @@
  * @brief The function that prints a hexadecimal number to stdout
  */
 
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Print a hexadecimal number to stdout
- * @param n The number to be printed
+ * @param n The hexadecimal number to be printed
  * @param uppercase Whether to print the number in uppercase
  * @return int The number of characters printed
  */
-int	ft_puthex(unsigned long long num, int is_upper)
+int	ft_puthex(unsigned long n, int uppercase)
 {
-	char	*hex_digits;
 	char	buffer[17];
+	char	*base;
 	int		len;
 	int		i;
 
-	if (is_upper)
-		hex_digits = "0123456789ABCDEF";
+	if (uppercase)
+		base = "0123456789ABCDEF";
 	else
-		hex_digits = "0123456789abcdef";
+		base = "0123456789abcdef";
 	len = 0;
-	if (num == 0)
+	i = 0;
+	if (n == 0)
 		return (ft_putchar('0'));
-	while (num)
+	while (n > 0)
 	{
-		buffer[len++] = hex_digits[num % 16];
-		num /= 16;
+		buffer[i++] = base[n % 16];
+		n /= 16;
 	}
-	i = len;
-	while (i--)
-		ft_putchar(buffer[i]);
+	while (i > 0)
+		len += ft_putchar(buffer[--i]);
 	return (len);
 }

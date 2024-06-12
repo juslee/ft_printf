@@ -6,42 +6,35 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 12:23:55 by welee             #+#    #+#              #
-#    Updated: 2024/06/11 11:16:32 by welee            ###   ########.fr        #
+#    Updated: 2024/06/12 09:00:13 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LIBC = ar rcs
-RM = rm -f
-MKDIR = mkdir -p
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-SRCS = $(shell find . -name '*.c' ! -name '*_bonus.c')
-# BSRCS = $(shell find . -name '*.c' ! -name 'ft_handle_format.c')
-OBJS = $(SRCS:%.c=%.o)
-# BOBJS = $(BSRCS:%.c=%.o)
+SRC = srcs/mandatory/ft_printf.c srcs/mandatory/ft_vprintf.c srcs/mandatory/handle_format.c \
+	srcs/mandatory/ft_putchar.c srcs/mandatory/ft_putstr.c srcs/mandatory/ft_putnbr.c \
+	srcs/mandatory/ft_putunbr.c srcs/mandatory/ft_puthex.c srcs/mandatory/ft_putptr.c
+OBJ = $(SRC:srcs/mandatory/%.c=objs/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(RM) $(NAME)
-	${LIBC} ${NAME} ${OBJS}
+$(NAME): $(OBJ)
+	ar rcs $@ $^
 
-# bonus: $(BOBJS)
-# 	$(RM) $(NAME)
-# 	${LIBC} ${NAME} ${BOBJS}
-
-%.o: %.c
+objs/%.o: srcs/mandatory/%.c
+	mkdir -p objs
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BOBJS)
+	rm -f $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

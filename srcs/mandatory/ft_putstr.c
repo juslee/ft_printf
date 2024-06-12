@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 18:59:41 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:20 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 08:54:39 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  * @brief The function that prints a string to stdout
  */
 
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Print a string to stdout
@@ -29,10 +29,9 @@ int	ft_putstr(char *str)
 	len = 0;
 	if (!str)
 		str = "(null)";
-	while (*str)
+	while (str[len])
 	{
-		ft_putchar(*str);
-		str++;
+		ft_putchar(str[len]);
 		len++;
 	}
 	return (len);

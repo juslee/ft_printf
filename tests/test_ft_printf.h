@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   test_ft_printf.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 17:13:44 by welee             #+#    #+#             */
-/*   Updated: 2024/05/26 11:07:29 by welee            ###   ########.fr       */
+/*   Created: 2024/06/12 08:49:19 by welee             #+#    #+#             */
+/*   Updated: 2024/06/12 09:06:05 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file ft_strlen.c
- * @brief Calculate the length of a string
- */
+#ifndef TEST_FT_PRINTF_H
+# define TEST_FT_PRINTF_H
 
-#include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <limits.h>
+# include "../includes/ft_printf.h"
 
-/**
- * @brief Calculate the length of a string
- * @param s The string to calculate the length
- * @return The length of the string
- */
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		++len;
-	return (len);
-}
+int	test_ft_printf(const char *format, ...);
+#endif

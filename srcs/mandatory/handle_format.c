@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_format.c                                 :+:      :+:    :+:   */
+/*   handle_format.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 18:56:47 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 09:41:02 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
  * @brief The main file for the ft_printf project
  */
 
-#include <stdarg.h>
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Handle the specifier and print the formatted string
@@ -24,23 +23,23 @@
  * @param args The arguments to be formatted
  * @return int The number of characters printed
  */
-int	ft_handle_format(const char **format, va_list *args)
-{
-	if (**format == SPEC_CHAR)
+int	handle_format(char specifier, va_list *args)
+	{
+	if (specifier == 'c')
 		return (ft_putchar(va_arg(*args, int)));
-	else if (**format == SPEC_STRING)
+	else if (specifier == 's')
 		return (ft_putstr(va_arg(*args, char *)));
-	else if (**format == SPEC_POINTER)
+	else if (specifier == 'p')
 		return (ft_putptr(va_arg(*args, void *)));
-	else if (**format == SPEC_DECIMAL || **format == SPEC_INTEGER)
+	else if (specifier == 'd' || specifier == 'i')
 		return (ft_putnbr(va_arg(*args, int)));
-	else if (**format == SPEC_UNSIGNED)
+	else if (specifier == 'u')
 		return (ft_putunbr(va_arg(*args, unsigned int)));
-	else if (**format == SPEC_HEX_LOW)
+	else if (specifier == 'x')
 		return (ft_puthex(va_arg(*args, unsigned int), 0));
-	else if (**format == SPEC_HEX_UP)
+	else if (specifier == 'X')
 		return (ft_puthex(va_arg(*args, unsigned int), 1));
-	else if (**format == SPEC_PERCENT)
+	else if (specifier == '%')
 		return (ft_putchar('%'));
 	return (0);
 }

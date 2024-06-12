@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptrlen.c                                        :+:      :+:    :+:   */
+/*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/26 16:33:39 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 11:24:57 by welee            ###   ########.fr       */
+/*   Created: 2024/05/27 18:52:13 by welee             #+#    #+#             */
+/*   Updated: 2024/06/12 09:41:19 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file ft_ptrlen.c
- * @brief The function that returns the length of a pointer
- */
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
 
-#include <stddef.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
-/**
- * @brief Get the length of a pointer
- * @param ptr The pointer
- * @return size_t The length of the pointer
- */
-size_t	ft_ptrlen(void *ptr)
-{
-	unsigned long long	address;
-	size_t				len;
-
-	len = 2;
-	address = (long)ptr;
-	while (address)
-	{
-		len++;
-		address /= 16;
-	}
-	return (len);
-}
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int n);
+int	ft_putunbr(unsigned int n);
+int	ft_puthex(unsigned long n, int uppercase);
+int	ft_putptr(void *ptr);
+int	handle_format(char specifier, va_list *args);
+#endif

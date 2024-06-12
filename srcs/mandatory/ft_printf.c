@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:01:10 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 08:37:05 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
  * @brief The main file for the ft_printf project
  */
 
-#include <stdarg.h>
-#include "ft_printf_util.h"
+#include "ft_printf.h"
 
 /**
  * @brief Print formatted string to stdout

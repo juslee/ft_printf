@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:11:45 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:15:25 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 09:34:15 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  * @brief The function that prints a pointer to stdout
  */
 
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Print a pointer to stdout
@@ -24,12 +24,12 @@
  */
 int	ft_putptr(void *ptr)
 {
+	unsigned long	addr;
 	int				len;
-	unsigned long	address;
 
+	addr = (unsigned long)ptr;
 	len = 0;
-	address = (long)ptr;
 	len += ft_putstr("0x");
-	len += ft_puthex(address, 0);
+	len += ft_puthex(addr, 0);
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 18:58:32 by welee             #+#    #+#             */
-/*   Updated: 2024/05/20 10:04:05 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 08:39:37 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  * @brief The function that prints a character to stdout
  */
 
-#include <unistd.h>
+#include "ft_utils.h"
 
 /**
  * @brief Print a character to stdout

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 10:07:16 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:26 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 08:42:42 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
  * @brief The function that prints an unsigned integer to stdout
  */
 
-#include <stdlib.h>
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Print an unsigned integer to stdout
@@ -25,11 +24,20 @@
  */
 int	ft_putunbr(unsigned int n)
 {
-	char	*str;
+	char	buffer[11];
 	int		len;
+	int		i;
 
-	str = ft_utoa(n);
-	len = ft_putstr(str);
-	free(str);
+	len = 0;
+	i = 0;
+	if (n == 0)
+		return (ft_putchar('0'));
+	while (n > 0)
+	{
+		buffer[i++] = (n % 10) + '0';
+		n /= 10;
+	}
+	while (i > 0)
+		len += ft_putchar(buffer[--i]);
 	return (len);
 }

@@ -6,87 +6,50 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/06/11 11:24:47 by welee            ###   ########.fr        #
+#    Updated: 2024/06/12 10:52:50 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
-LIBFT_DIR = libft
-SRCS_DIR = srcs
-OBJS_DIR = objs
-INCLUDES_DIR = includes
-TEST_DIR = tests
-DIST_DIR = dist
-BIN_DIR = bin
-DOCS_DIR = docs
-PUBLIC_DIR = public
+NAME = bin/libftprintf.a
 
-INCLUDES = -I ${INCLUDES_DIR} -I ${LIBFT_DIR}/bin
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-LFLAGS = -Llibft/bin -lft
-LIBC = ar rcs
-RM = rm -f
-MAKE = make -C
-MKDIR = mkdir -p
-CP = cp -f
-FRANCINETTE = francinette
-FRANCINETTE_FLAGS = -s
-WHOAMI = whoami
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-SRCS = $(shell find $(SRCS_DIR) -name '*.c' ! -name '*_bonus.c')
-BSRCS = $(shell find $(SRCS_DIR) -name '*.c' ! -name 'ft_handle_format.c')
-OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
-BOBJS = $(BSRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
-HEADERS = $(wildcard $(INCLUDES_DIR)/ft_*.h)
-
-NORM = norminette
-NORM_FLAGS = -R CheckForbiddenSourceHeader -R CheckDefine
-
-DOXYGEN = doxygen
-DOXYGEN_CONFIG = Doxyfile
+SRC = srcs/mandatory/ft_printf.c srcs/mandatory/ft_vprintf.c srcs/mandatory/handle_format.c \
+	srcs/mandatory/ft_putchar.c srcs/mandatory/ft_putstr.c srcs/mandatory/ft_putnbr.c \
+	srcs/mandatory/ft_putunbr.c srcs/mandatory/ft_puthex.c srcs/mandatory/ft_putptr.c
+OBJ = $(SRC:srcs/mandatory/%.c=objs/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(MKDIR) $(BIN_DIR)
-	$(RM) $(BIN_DIR)/$(NAME)
-	$(LIBC) $(BIN_DIR)/$(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	mkdir -p bin
+	ar rcs $@ $^
 
-bonus: $(BOBJS)
-	$(MKDIR) $(BIN_DIR)
-	$(RM) $(BIN_DIR)/$(NAME)
-	$(LIBC) $(BIN_DIR)/$(NAME) $(BOBJS)
-
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	$(MKDIR) $(@D)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+objs/%.o: srcs/mandatory/%.c
+	mkdir -p objs
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS) $(BOBJS)
+	rm -f $(OBJ) tests/test_ft_printf.o
 
 fclean: clean
-	$(RM) $(BIN_DIR)/$(NAME)
+	rm -f $(NAME) tests/test_ft_printf
 
-re: fclean all dist
+re: fclean all
 
-dist:
-	@$(MKDIR) $(DIST_DIR)
-	@$(foreach src,$(SRCS),cp $(src) $(DIST_DIR);)
-	@find $(INCLUDES_DIR) -type f -exec cp {} $(DIST_DIR) \;
-	@$(CP) $(PUBLIC_DIR)/Makefile $(DIST_DIR)
-	@echo $(shell $(WHOAMI)) > $(DIST_DIR)/author
+tests: $(NAME)
+	$(CC) $(CFLAGS) -Iincludes -o tests/test_ft_printf tests/test_ft_printf.c $(NAME)
+	./tests/test_ft_printf
 
 norm:
-	$(NORM) $(NORM_FLAGS) $(SRCS_DIR) $(INCLUDES_DIR)
+	norminette includes/*.h srcs/mandatory/*.c
 
-tests: all
-	$(MAKE) $(TEST_DIR) all
+dist:
+	rm -rf dist
+	mkdir -p dist/includes dist/srcs/mandatory
+	cp -r includes/*.h dist/includes/
+	cp -r srcs/mandatory/*.c dist/srcs/mandatory/
+	cp public/Makefile dist/
 
-tests_bonus: bonus
-	$(MAKE) $(TEST_DIR) bonus
-
-docs:
-	${DOXYGEN} ${DOXYGEN_CONFIG}
-
-.PHONY: all clean fclean re dist norm tests docs
+.PHONY: all clean fclean re tests dist

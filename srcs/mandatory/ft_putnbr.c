@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:02:49 by welee             #+#    #+#             */
-/*   Updated: 2024/05/27 19:02:02 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 09:46:37 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
  * @brief The function that prints an integer to stdout
  */
 
-#include <stdlib.h>
-#include "ft_printf_util.h"
+#include "ft_utils.h"
 
 /**
  * @brief Print an integer to stdout
@@ -25,11 +24,28 @@
  */
 int	ft_putnbr(int n)
 {
-	char	*str;
-	int		len;
+	char			buffer[12];
+	int				len;
+	int				i;
+	unsigned int	num;
 
-	str = ft_itoa(n);
-	len = ft_putstr(str);
-	free(str);
+	len = 0;
+	i = 0;
+	if (n == 0)
+		return (ft_putchar('0'));
+	if (n < 0)
+	{
+		len += ft_putchar('-');
+		num = -n;
+	}
+	else
+		num = n;
+	while (num > 0)
+	{
+		buffer[i++] = (num % 10) + '0';
+		num /= 10;
+	}
+	while (i > 0)
+		len += ft_putchar(buffer[--i]);
 	return (len);
 }
