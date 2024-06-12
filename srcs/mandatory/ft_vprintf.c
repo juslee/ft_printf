@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 09:50:58 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 14:40:38 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@
 int	ft_vprintf(const char *format, va_list args)
 {
 	int	len;
-	int	i;
 
 	len = 0;
-	i = 0;
-	while (format[i])
+	while (format && *format)
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (*format == '%' && *(format + 1))
 		{
-			i++;
-			len += handle_format(format[i], &args);
+			format++;
+			len += handle_format(&format, &args);
 		}
 		else
-			len += ft_putchar(format[i]);
-		i++;
+		{
+			len += ft_putchar(*format);
+		}
+		format++;
 	}
 	return (len);
 }

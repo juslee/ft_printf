@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.h                                         :+:      :+:    :+:   */
+/*   ft_hexlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 18:52:13 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 12:36:50 by welee            ###   ########.fr       */
+/*   Created: 2024/06/12 12:14:01 by welee             #+#    #+#             */
+/*   Updated: 2024/06/12 12:15:01 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+int	ft_hexlen(unsigned long n)
+{
+	int	len;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putnbr(int n);
-int	ft_putunbr(unsigned int n);
-int	ft_puthex(unsigned long n, int uppercase);
-int	ft_putptr(void *ptr);
-int	handle_format(const char **format, va_list *args);
-#endif
+	len = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		n /= 16;
+		len++;
+	}
+	return (len);
+}

@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.h                                         :+:      :+:    :+:   */
+/*   parse_width.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 18:52:13 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 12:36:50 by welee            ###   ########.fr       */
+/*   Created: 2024/06/12 12:18:12 by welee             #+#    #+#             */
+/*   Updated: 2024/06/12 12:37:46 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+#include "ft_utils_bonus.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+int	parse_width(const char **format, va_list *args)
+{
+	int	width;
 
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putnbr(int n);
-int	ft_putunbr(unsigned int n);
-int	ft_puthex(unsigned long n, int uppercase);
-int	ft_putptr(void *ptr);
-int	handle_format(const char **format, va_list *args);
-#endif
+	width = 0;
+	if (**format == '*')
+	{
+		width = va_arg(*args, int);
+		(*format)++;
+	}
+	else
+	{
+		while (**format >= '0' && **format <= '9')
+		{
+			width = width * 10 + (**format - '0');
+			(*format)++;
+		}
+	}
+	return (width);
+}

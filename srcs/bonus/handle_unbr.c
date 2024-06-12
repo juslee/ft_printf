@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.h                                         :+:      :+:    :+:   */
+/*   handle_unbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 18:52:13 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 12:36:50 by welee            ###   ########.fr       */
+/*   Created: 2024/06/12 12:55:22 by welee             #+#    #+#             */
+/*   Updated: 2024/06/12 13:45:42 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_UTILS_H
-# define FT_UTILS_H
+#include "ft_utils.h"
+#include "ft_utils_bonus.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+int	handle_unbr(t_format *fmt, unsigned int n)
+{
+	int	len;
+	int	num_len;
 
-int	ft_putchar(char c);
-int	ft_putstr(char *str);
-int	ft_putnbr(int n);
-int	ft_putunbr(unsigned int n);
-int	ft_puthex(unsigned long n, int uppercase);
-int	ft_putptr(void *ptr);
-int	handle_format(const char **format, va_list *args);
-#endif
+	len = 0;
+	num_len = ft_unbrlen(n);
+	if (fmt->left_align)
+	{
+		len += ft_putunbr(n);
+		while (fmt->width-- > num_len)
+			len += ft_putchar(' ');
+	}
+	else
+	{
+		while (fmt->width-- > num_len)
+			len += ft_putchar(' ');
+		len += ft_putunbr(n);
+	}
+	return (len);
+}

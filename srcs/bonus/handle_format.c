@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 13:10:50 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/12 14:38:46 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  * @brief The main file for the ft_printf project
  */
 
-#include "ft_utils.h"
+#include "ft_utils_bonus.h"
 
 /**
  * @brief Handle the specifier and print the formatted string
@@ -25,24 +25,29 @@
  */
 int	handle_format(const char **format, va_list *args)
 {
-	char	specifier;
+	t_format	fmt;
+	char		specifier;
 
+	init_format(&fmt);
+	parse_flags(format, &fmt);
+	fmt.width = parse_width(format, args);
+	fmt.precision = parse_precision(format, args);
 	specifier = **format;
 	if (specifier == 'c')
-		return (ft_putchar(va_arg(*args, int)));
+		return (handle_char(&fmt, va_arg(*args, int)));
 	else if (specifier == 's')
-		return (ft_putstr(va_arg(*args, char *)));
+		return (handle_str(&fmt, va_arg(*args, char *)));
 	else if (specifier == 'p')
-		return (ft_putptr(va_arg(*args, void *)));
+		return (handle_ptr(&fmt, va_arg(*args, void *)));
 	else if (specifier == 'd' || specifier == 'i')
-		return (ft_putnbr(va_arg(*args, int)));
+		return (handle_nbr(&fmt, va_arg(*args, int)));
 	else if (specifier == 'u')
-		return (ft_putunbr(va_arg(*args, unsigned int)));
+		return (handle_unbr(&fmt, va_arg(*args, unsigned int)));
 	else if (specifier == 'x')
-		return (ft_puthex(va_arg(*args, unsigned int), 0));
+		return (handle_hex(&fmt, va_arg(*args, unsigned int), 0));
 	else if (specifier == 'X')
-		return (ft_puthex(va_arg(*args, unsigned int), 1));
+		return (handle_hex(&fmt, va_arg(*args, unsigned int), 1));
 	else if (specifier == '%')
-		return (ft_putchar('%'));
+		return (handle_char(&fmt, '%'));
 	return (0);
 }
