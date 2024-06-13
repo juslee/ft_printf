@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:52:13 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 12:36:50 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:05:15 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ft_putnbr(int n);
 int	ft_putunbr(unsigned int n);
 int	ft_puthex(unsigned long n, int uppercase);
 int	ft_putptr(void *ptr);
-int	handle_format(const char **format, va_list *args);
+int	handle_format(const char **format, va_list args);
 #endif

@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 14:24:49 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 13:10:50 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:04:32 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@
  * @param args The arguments to be formatted
  * @return int The number of characters printed
  */
-int	handle_format(const char **format, va_list *args)
+int	handle_format(const char **format, va_list args)
 {
 	char	specifier;
 
 	specifier = **format;
 	if (specifier == 'c')
-		return (ft_putchar(va_arg(*args, int)));
+		return (ft_putchar(va_arg(args, int)));
 	else if (specifier == 's')
-		return (ft_putstr(va_arg(*args, char *)));
+		return (ft_putstr(va_arg(args, char *)));
 	else if (specifier == 'p')
-		return (ft_putptr(va_arg(*args, void *)));
+		return (ft_putptr(va_arg(args, void *)));
 	else if (specifier == 'd' || specifier == 'i')
-		return (ft_putnbr(va_arg(*args, int)));
+		return (ft_putnbr(va_arg(args, int)));
 	else if (specifier == 'u')
-		return (ft_putunbr(va_arg(*args, unsigned int)));
+		return (ft_putunbr(va_arg(args, unsigned int)));
 	else if (specifier == 'x')
-		return (ft_puthex(va_arg(*args, unsigned int), 0));
+		return (ft_puthex(va_arg(args, unsigned int), 0));
 	else if (specifier == 'X')
-		return (ft_puthex(va_arg(*args, unsigned int), 1));
+		return (ft_puthex(va_arg(args, unsigned int), 1));
 	else if (specifier == '%')
 		return (ft_putchar('%'));
 	return (0);
