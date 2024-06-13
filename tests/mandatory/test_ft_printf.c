@@ -6,7 +6,7 @@
 /*   By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 08:51:29 by welee             #+#    #+#             */
-/*   Updated: 2024/06/12 09:48:58 by welee            ###   ########.fr       */
+/*   Updated: 2024/06/13 09:18:35 by welee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(void)
 	result += test_ft_printf("Character: %c%c%c\n", 'a', '\t', 'b');
 	result += test_ft_printf("Integer (INT_MIN): %d\n", INT_MIN);
 	result += test_ft_printf("No format: \001\002\007\v\010\f\r\n");
+	result += test_ft_printf("Pointer (NULL): %p\n", NULL);
 
 	if (result == 0)
 		printf("All tests passed!\n");
