@@ -6,13 +6,13 @@
 #    By: welee <welee@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/07 14:19:51 by welee             #+#    #+#              #
-#    Updated: 2024/06/12 14:32:16 by welee            ###   ########.fr        #
+#    Updated: 2024/06/13 10:02:06 by welee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bin/libftprintf.a
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 MANDATORY_SRC = srcs/mandatory/ft_printf.c srcs/mandatory/ft_vprintf.c srcs/mandatory/handle_format.c \
